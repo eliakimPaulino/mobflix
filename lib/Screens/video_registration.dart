@@ -156,7 +156,23 @@ class _MyCustomTextFildState extends State<MyCustomTextFild> {
               },
               child: const Text('Buscar'),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 32),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                Text(
+                  'Preview',
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    letterSpacing: 4,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromRGBO(254, 185, 5, 1),
+                  ),
+                ),
+                SizedBox(),
+              ],
+            ),
             Visibility(
               visible: formKey.currentState?.validate() != null,
               child: Column(
@@ -202,18 +218,22 @@ class TechCategoryState extends State<TechCategory> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(24.0, 8.0, 24.0, 8.0),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<String>(
-          dropdownColor:
-              // const Color.fromRGBO(24, 67, 136, 1)
-              const Color(0xfff7f7f8),
-          hint: const Text('Selecionar Categoria   ',
-              style: TextStyle(color: Color.fromRGBO(254, 185, 5, 1))),
-          isExpanded: false,
-          value: value,
-          items: categorys.map(buildMenuCategory).toList(),
-          onChanged: (value) => setState(() => this.value = value),
-        ),
+      child: Column(
+        children: [
+          DropdownButtonHideUnderline(
+            child: DropdownButton<String>(
+              dropdownColor:
+                  // const Color.fromRGBO(24, 67, 136, 1)
+                  const Color(0xfff7f7f8),
+              hint: const Text('Selecionar Categoria   ',
+                  style: TextStyle(color: Color.fromRGBO(254, 185, 5, 1))),
+              isExpanded: false,
+              value: value,
+              items: categorys.map(buildMenuCategory).toList(),
+              onChanged: (value) => setState(() => this.value = value),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -247,16 +267,6 @@ class _VideoPreviewState extends State<VideoPreview> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Preview',
-            textAlign: TextAlign.start,
-            style: TextStyle(
-              letterSpacing: 4,
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: Color.fromRGBO(254, 185, 5, 1),
-            ),
-          ),
           const SizedBox(height: 20),
           Container(
             // key: ValueKey(widget.url),

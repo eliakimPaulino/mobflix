@@ -60,44 +60,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     VideoBanner(context: context),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: const [
-                            Categorys(
-                              name: 'Mobile',
-                              color: Color.fromRGBO(254, 185, 5, 1),
-                            ),
-                            Categorys(
-                              name: 'Devops',
-                              color: Color.fromRGBO(232, 93, 98, 1),
-                            ),
-                            Categorys(
-                              name: 'Programação',
-                              color: Color.fromRGBO(0, 198, 109, 1),
-                            ),
-                            Categorys(
-                              name: 'Data Science',
-                              color: Color.fromRGBO(152, 207, 58, 1),
-                            ),
-                            Categorys(
-                              name: 'Front End',
-                              color: Color.fromRGBO(101, 200, 246, 1),
-                            ),
-                            Categorys(
-                              name: 'UX e Design',
-                              color: Color.fromRGBO(214, 107, 185, 1),
-                            ),
-                            Categorys(
-                              name: 'Outros',
-                              color: Color.fromARGB(255, 255, 145, 0),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    const CategoryRow(),
                     CardPresentation(
                       context: context,
                       url:
@@ -117,6 +80,52 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class CategoryRow extends StatelessWidget {
+  const CategoryRow({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          children: const [
+            Categorys(
+              name: 'Mobile',
+              color: Color.fromRGBO(254, 185, 5, 1),
+            ),
+            Categorys(
+              name: 'Devops',
+              color: Color.fromRGBO(232, 93, 98, 1),
+            ),
+            Categorys(
+              name: 'Programação',
+              color: Color.fromRGBO(0, 198, 109, 1),
+            ),
+            Categorys(
+              name: 'Data Science',
+              color: Color.fromRGBO(152, 207, 58, 1),
+            ),
+            Categorys(
+              name: 'Front End',
+              color: Color.fromRGBO(101, 200, 246, 1),
+            ),
+            Categorys(
+              name: 'UX e Design',
+              color: Color.fromRGBO(214, 107, 185, 1),
+            ),
+            Categorys(
+              name: 'Outros',
+              color: Color.fromARGB(255, 255, 145, 0),
+            ),
+          ],
         ),
       ),
     );
