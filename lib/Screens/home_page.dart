@@ -44,69 +44,76 @@ class HomePage extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    'MOBFLIX',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.amber[900],
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        'MOBFLIX',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          letterSpacing: 4,
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.amber[900],
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                VideoBanner(context: context),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: const [
-                        Categorys(
-                            name: 'Mobile',
-                            color: Color.fromRGBO(254, 185, 5, 1)),
-                        Categorys(
-                            name: 'Devops',
-                            color: Color.fromRGBO(232, 93, 98, 1)),
-                        Categorys(
-                            name: 'Programação',
-                            color: Color.fromRGBO(0, 198, 109, 1)),
-                        Categorys(
-                            name: 'Data Science',
-                            color: Color.fromRGBO(152, 207, 58, 1)),
-                        Categorys(
-                            name: 'Front End',
-                            color: Color.fromRGBO(101, 200, 246, 1)),
-                        Categorys(
-                            name: 'UX e Design',
-                            color: Color.fromRGBO(214, 107, 185, 1)),
-                      ],
+                    VideoBanner(context: context),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: const [
+                            Categorys(
+                              name: 'Mobile',
+                              color: Color.fromRGBO(254, 185, 5, 1),
+                            ),
+                            Categorys(
+                              name: 'Devops',
+                              color: Color.fromRGBO(232, 93, 98, 1),
+                            ),
+                            Categorys(
+                              name: 'Programação',
+                              color: Color.fromRGBO(0, 198, 109, 1),
+                            ),
+                            Categorys(
+                              name: 'Data Science',
+                              color: Color.fromRGBO(152, 207, 58, 1),
+                            ),
+                            Categorys(
+                              name: 'Front End',
+                              color: Color.fromRGBO(101, 200, 246, 1),
+                            ),
+                            Categorys(
+                              name: 'UX e Design',
+                              color: Color.fromRGBO(214, 107, 185, 1),
+                            ),
+                            Categorys(
+                              name: 'Outros',
+                              color: Color.fromARGB(255, 255, 145, 0),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
+                    CardPresentation(
+                      context: context,
+                      url:
+                          'https://www.youtube.com/watch?v=P4BNi_yPehc&list=PLh2Y_pKOa4UciHMCIdxq96xX_L0gX2rYg&index=1&ab_channel=AluraCursosOnline',
+                      name: 'Outros',
+                      color: const Color.fromARGB(255, 255, 145, 0),
+                    ),
+                    CardPresentation(
+                      context: context,
+                      url: 'https://www.youtube.com/watch?v=imB0QVoNrGc',
+                      name: 'Programação',
+                      color: const Color.fromRGBO(0, 198, 109, 1),
+                    ),
+                  ],
                 ),
-                // CardPresentation(
-                //     context: context,
-                //     link: 'https://www.youtube.com/watch?v=uOagLB3uyeU'),
-                // const SizedBox(height: 15),
-                CardPresentation(
-                  context: context,
-                  url:
-                      'https://www.youtube.com/watch?v=P4BNi_yPehc&list=PLh2Y_pKOa4UciHMCIdxq96xX_L0gX2rYg&index=1&ab_channel=AluraCursosOnline',
-                  videoTitle: 'O que são Git e Github?\n#HipstersPontoTube',
-                  name: 'Programação',
-                  color: const Color.fromRGBO(0, 198, 109, 1),
-                ),
-                const SizedBox(height: 15),
-                CardPresentation(
-                  context: context,
-                  url: 'https://www.youtube.com/watch?v=uOagLB3uyeU',
-                  videoTitle:
-                      'Como aprender melhor?\nCom Diogo Pires | #HipstersPontoTube',
-                  name: 'Mobile',
-                  color: const Color.fromRGBO(254, 185, 5, 1),
-                ),
-                const SizedBox(height: 15),
+                // const VideosList(),
               ],
             ),
           ),

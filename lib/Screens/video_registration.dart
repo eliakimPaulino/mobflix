@@ -163,7 +163,9 @@ class _MyCustomTextFildState extends State<MyCustomTextFild> {
                 children: [
                   VideoPreview(url: url),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                     child: const Text('Cadastrar'),
                   ),
                 ],
@@ -241,23 +243,24 @@ class _VideoPreviewState extends State<VideoPreview> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(24.0, 8.0, 24.0, 8.0),
+      padding: const EdgeInsets.fromLTRB(24.0, 08.0, 24.0, 8.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
             'Preview',
             textAlign: TextAlign.start,
             style: TextStyle(
               letterSpacing: 4,
-              fontSize: 32,
+              fontSize: 24,
               fontWeight: FontWeight.bold,
               color: Color.fromRGBO(254, 185, 5, 1),
             ),
           ),
-          const SizedBox(height: 25),
+          const SizedBox(height: 20),
           Container(
-            key: ValueKey(widget.url),
-            margin: const EdgeInsets.all(16),
+            // key: ValueKey(widget.url),
+            margin: const EdgeInsets.all(4),
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(
                 Radius.circular(20),

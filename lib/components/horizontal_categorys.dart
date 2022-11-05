@@ -39,3 +39,12 @@ class Categorys extends StatelessWidget {
     );
   }
 }
+
+List<Categorys> categorys = const [
+  Categorys(name: 'Mobile', color: Color.fromRGBO(254, 185, 5, 1)),
+  Categorys(name: 'Devops', color: Color.fromRGBO(232, 93, 98, 1)),
+  Categorys(name: 'Programação', color: Color.fromRGBO(0, 198, 109, 1)),
+  Categorys(name: 'Data Science', color: Color.fromRGBO(152, 207, 58, 1)),
+  Categorys(name: 'Front End', color: Color.fromRGBO(101, 200, 246, 1)),
+  Categorys(name: 'UX e Design', color: Color.fromRGBO(214, 107, 185, 1)),
+];

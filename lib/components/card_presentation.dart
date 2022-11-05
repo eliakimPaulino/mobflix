@@ -1,18 +1,22 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import 'horizontal_categorys.dart';
+import 'package:flutter_link_previewer/flutter_link_previewer.dart';
+import 'package:flutter_chat_types/flutter_chat_types.dart' show PreviewData;
 
 class CardPresentation extends StatefulWidget {
   const CardPresentation(
       {Key? key,
       required this.context,
       required this.url,
-      required this.videoTitle, required this.name, required this.color})
+      required this.name,
+      required this.color})
       : super(key: key);
   final BuildContext context;
   final String url;
-  final String videoTitle;
   final String name;
   final Color color;
 
@@ -50,40 +54,54 @@ class _CardPresentationState extends State<CardPresentation> {
     super.dispose();
   }
 
+  Map<String, PreviewData> datas = {};
+
   @override
   Widget build(BuildContext context) {
     return YoutubePlayerBuilder(
       player: YoutubePlayer(controller: controller),
       builder: (context, player) => Card(
+        surfaceTintColor: Colors.blue,
         clipBehavior: Clip.antiAlias,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AspectRatio(
-              aspectRatio: 16.0 / 9.0,
-              child: player,
+            Stack(
+              children: [
+                Visibility(
+                  visible: true,
+                  child: AspectRatio(
+                    aspectRatio: 16.0 / 9.0,
+                    child: player,
+                  ),
+                ),
+                Positioned(
+                    top: 0,
+                    left: 0,
+                    child: Categorys(name: widget.name, color: widget.color)),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Column(
                     children: [
-                      SizedBox(
-                        width: 220,
-                        child: Text(
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          widget.videoTitle,
-                          style: const TextStyle(
-                              color: Color.fromRGBO(12, 67, 136, 1),
-                              // fontWeight: FontWeight.bold,
-                              fontSize: 16),
-                        ),
+                      LinkPreview(
+                        hideImage: true,
+                        onPreviewDataFetched: (data) {
+                          setState(() {
+                            datas = {
+                              ...datas,
+                              widget.url: data,
+                            };
+                          });
+                        },
+                        text: widget.url,
+                        previewData: datas[widget.url],
+                        width: MediaQuery.of(context).size.width,
                       ),
-                      Categorys(name: widget.name, color: widget.color),
                     ],
                   ),
                 ],
