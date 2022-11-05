@@ -204,12 +204,12 @@ class TechCategory extends StatefulWidget {
 
 class TechCategoryState extends State<TechCategory> {
   final categorys = [
-    'Mobile',
-    'DevOps',
-    'Programação',
-    'Data Science',
-    'Font End',
-    'UX UI Design'
+    'MOBILE_',
+    'DEVOPS_',
+    'PROGRAMAÇÃO_',
+    'DATA SCIENCE_',
+    'FRONT-END_',
+    'UX&UI DESIGN_'
   ];
 
   String? value;
@@ -223,8 +223,8 @@ class TechCategoryState extends State<TechCategory> {
           DropdownButtonHideUnderline(
             child: DropdownButton<String>(
               dropdownColor:
-                  // const Color.fromRGBO(24, 67, 136, 1)
-                  const Color(0xfff7f7f8),
+                  const Color.fromRGBO(5, 25, 51, 1),
+                  // const Color(0xfff7f7f8),
               hint: const Text('Selecionar Categoria   ',
                   style: TextStyle(color: Color.fromRGBO(254, 185, 5, 1))),
               isExpanded: false,

@@ -38,6 +38,7 @@ class HomePage extends StatelessWidget {
               colors: [
                 Color.fromRGBO(5, 25, 51, 1),
                 Color.fromRGBO(12, 67, 136, 1),
+                Color.fromRGBO(12, 67, 136, 1),
               ],
             ),
           ),

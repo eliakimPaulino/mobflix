@@ -60,6 +60,20 @@ class _CardPresentationState extends State<CardPresentation> {
       child: YoutubePlayerBuilder(
         player: YoutubePlayer(controller: controller),
         builder: (context, player) => Card(
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5),
+            // BorderRadius.only(
+            //   bottomLeft: Radius.circular(20),
+            //   bottomRight: Radius.circular(20),
+            // ),
+            // side: const BorderSide(
+            //   width: 2,
+            //   color:
+            //   // Color.fromRGBO(255, 186, 5, 1),
+            //   Colors.white,
+            // ),
+          ),
           surfaceTintColor: Colors.blue,
           clipBehavior: Clip.antiAlias,
           child: Column(
