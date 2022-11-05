@@ -62,17 +62,22 @@ class HomePage extends StatelessWidget {
                     VideoBanner(context: context),
                     const CategoryRow(),
                     CardPresentation(
-                      context: context,
+                      categoryContainer: categorys[0],
+                      // context: context,
                       url:
-                          'https://www.youtube.com/watch?v=P4BNi_yPehc&list=PLh2Y_pKOa4UciHMCIdxq96xX_L0gX2rYg&index=1&ab_channel=AluraCursosOnline',
-                      name: 'Outros',
-                      color: const Color.fromARGB(255, 255, 145, 0),
+                          // 'https://www.youtube.com/watch?v=P4BNi_yPehc&list=PLh2Y_pKOa4UciHMCIdxq96xX_L0gX2rYg&index=1&ab_channel=AluraCursosOnline',
+                          'https://youtu.be/yI3AYA3L0xU',
+                      // name: 'Outros',
+                      // color: const Color.fromARGB(255, 255, 145, 0),
                     ),
                     CardPresentation(
-                      context: context,
-                      url: 'https://www.youtube.com/watch?v=imB0QVoNrGc',
-                      name: 'Programação',
-                      color: const Color.fromRGBO(0, 198, 109, 1),
+                      categoryContainer: categorys[1],
+                      // context: context,
+                      url:
+                          // 'https://www.youtube.com/watch?v=imB0QVoNrGc',
+                          'https://youtu.be/fSBLPaj0aWM',
+                      // name: 'Programação',
+                      // color: const Color.fromRGBO(0, 198, 109, 1),
                     ),
                   ],
                 ),
@@ -96,35 +101,13 @@ class CategoryRow extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
-          children: const [
-            Categorys(
-              name: 'Mobile',
-              color: Color.fromRGBO(254, 185, 5, 1),
-            ),
-            Categorys(
-              name: 'Devops',
-              color: Color.fromRGBO(232, 93, 98, 1),
-            ),
-            Categorys(
-              name: 'Programação',
-              color: Color.fromRGBO(0, 198, 109, 1),
-            ),
-            Categorys(
-              name: 'Data Science',
-              color: Color.fromRGBO(152, 207, 58, 1),
-            ),
-            Categorys(
-              name: 'Front End',
-              color: Color.fromRGBO(101, 200, 246, 1),
-            ),
-            Categorys(
-              name: 'UX e Design',
-              color: Color.fromRGBO(214, 107, 185, 1),
-            ),
-            Categorys(
-              name: 'Outros',
-              color: Color.fromARGB(255, 255, 145, 0),
-            ),
+          children: [
+            categorys[0],
+            categorys[1],
+            categorys[2],
+            categorys[3],
+            categorys[4],
+            categorys[5],
           ],
         ),
       ),

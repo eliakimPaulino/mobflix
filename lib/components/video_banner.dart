@@ -16,7 +16,9 @@ class _VideoBannerState extends State<VideoBanner> {
   void initState() {
     super.initState();
     const url =
-        'https://www.youtube.com/watch?v=94yuIVdoevc&ab_channel=AluraCursosOnline';
+        // 'https://www.youtube.com/watch?v=94yuIVdoevc&ab_channel=AluraCursosOnline';
+    // 'https://www.youtube.com/watch?v=vfR8GWj28To&ab_channel=AluraCursosOnline';
+    'https://youtu.be/2t8ycK8D4Rk';
 
     controller = YoutubePlayerController(
       initialVideoId: YoutubePlayer.convertUrlToId(url)!,
