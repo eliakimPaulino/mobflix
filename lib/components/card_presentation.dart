@@ -13,7 +13,7 @@ class CardPresentation extends StatefulWidget {
     required this.url,
     required this.categoryContainer,
   }) : super(key: key);
-  // final BuildContext context;
+  
   final String url;
   final Widget categoryContainer;
 
@@ -63,16 +63,6 @@ class _CardPresentationState extends State<CardPresentation> {
           elevation: 2,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),
-            // BorderRadius.only(
-            //   bottomLeft: Radius.circular(20),
-            //   bottomRight: Radius.circular(20),
-            // ),
-            // side: const BorderSide(
-            //   width: 2,
-            //   color:
-            //   // Color.fromRGBO(255, 186, 5, 1),
-            //   Colors.white,
-            // ),
           ),
           surfaceTintColor: Colors.blue,
           clipBehavior: Clip.antiAlias,
@@ -89,7 +79,7 @@ class _CardPresentationState extends State<CardPresentation> {
                     ),
                   ),
                   Positioned(
-                    top: 0,
+                    top: 6,
                     left: 0,
                     child: widget.categoryContainer,
                   ),

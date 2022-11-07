@@ -5,11 +5,44 @@ import '../components/card_presentation.dart';
 import '../components/horizontal_categorys.dart';
 import '../components/video_banner.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final List<Widget> cardsList = [
+    CardPresentation(
+      categoryContainer: categorys[0],
+      // context: context,
+      url: 'https://youtu.be/yI3AYA3L0xU',
+    ),
+    CardPresentation(
+      categoryContainer: categorys[1],
+      url: 'https://youtu.be/fSBLPaj0aWM',
+    ),
+    CardPresentation(
+      categoryContainer: categorys[2],
+      // context: context,
+      url: 'https://www.youtube.com/watch?v=aBUSyXKz9ho',
+    ),
+    CardPresentation(
+      categoryContainer: categorys[3],
+      url: 'https://youtu.be/FmI_mg2CUsU',
+    ),
+    CardPresentation(
+      categoryContainer: categorys[4],
+      url: 'https://youtu.be/NJnHLeamghI',
+    ),
+    CardPresentation(
+      categoryContainer: categorys[5],
+      url: 'https://youtu.be/jtCfek5b8QY',
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -45,44 +78,31 @@ class HomePage extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    'MOBFLIX',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      letterSpacing: 4,
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.amber[900],
+                    ),
+                  ),
+                ),
+                VideoBanner(context: context),
+                const CategoryRow(),
                 Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(
-                        'MOBFLIX',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          letterSpacing: 4,
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.amber[900],
-                        ),
-                      ),
-                    ),
-                    VideoBanner(context: context),
-                    const CategoryRow(),
-                    CardPresentation(
-                      categoryContainer: categorys[0],
-                      // context: context,
-                      url:
-                          // 'https://www.youtube.com/watch?v=P4BNi_yPehc&list=PLh2Y_pKOa4UciHMCIdxq96xX_L0gX2rYg&index=1&ab_channel=AluraCursosOnline',
-                          'https://youtu.be/yI3AYA3L0xU',
-                      // name: 'Outros',
-                      // color: const Color.fromARGB(255, 255, 145, 0),
-                    ),
-                    CardPresentation(
-                      categoryContainer: categorys[1],
-                      // context: context,
-                      url:
-                          // 'https://www.youtube.com/watch?v=imB0QVoNrGc',
-                          'https://youtu.be/fSBLPaj0aWM',
-                      // name: 'Programação',
-                      // color: const Color.fromRGBO(0, 198, 109, 1),
-                    ),
+                    cardsList[0],
+                    cardsList[1],
+                    cardsList[2],
+                    cardsList[3],
+                    cardsList[4],
+                    cardsList[5],
                   ],
                 ),
-                // const VideosList(),
               ],
             ),
           ),

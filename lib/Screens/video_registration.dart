@@ -1,8 +1,12 @@
 // ignore_for_file: depend_on_referenced_packages, prefer_const_constructors
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_link_previewer/flutter_link_previewer.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' show PreviewData;
+import 'package:mobflix/components/card_presentation.dart';
+
+import '../components/horizontal_categorys.dart';
 
 class VideoReagistration extends StatefulWidget {
   const VideoReagistration({Key? key}) : super(key: key);
@@ -34,11 +38,11 @@ class _VideoReagistrationState extends State<VideoReagistration> {
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 PageTitle(),
                 MyCustomTextFild(
                   labelText: 'URL',
-                  hintText: 'https://youtube.com/c/Alura',
+                  hintText: 'EX.: https://youtube.com/c/Alura',
                 ),
               ],
             ),
@@ -94,11 +98,13 @@ class PageTitle extends StatelessWidget {
 }
 
 class MyCustomTextFild extends StatefulWidget {
-  const MyCustomTextFild(
-      {Key? key, required this.labelText, required this.hintText})
+  MyCustomTextFild({Key? key, required this.labelText, required this.hintText})
       : super(key: key);
   final String labelText;
   final String hintText;
+  final TextEditingController _controllerURL = TextEditingController();
+  // final DropdownMenuItem _controllerCategory;
+  String? value;
 
   @override
   State<MyCustomTextFild> createState() => _MyCustomTextFildState();
@@ -145,7 +151,11 @@ class _MyCustomTextFildState extends State<MyCustomTextFild> {
               textInputAction: TextInputAction.go,
             ),
             const SizedBox(height: 16),
-            const TechCategory(),
+            // const TechCategory(),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8, 8, 16, 8),
+              child: _listCategoryCard(),
+            ),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
@@ -181,6 +191,7 @@ class _MyCustomTextFildState extends State<MyCustomTextFild> {
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
+                      // TechCategory().buildMenuCategory().value;
                     },
                     child: const Text('Cadastrar'),
                   ),
@@ -190,6 +201,52 @@ class _MyCustomTextFildState extends State<MyCustomTextFild> {
             const SizedBox(height: 16),
           ],
         ),
+      ),
+    );
+  }
+
+  // void _addVideoToList(BuildContext context) {
+  //   final controllerURL = widget._controllerURL.text;
+  //   final controllerCatogory = widget.value;
+  //   if (controllerURL != null && controllerCatogory != null) {
+  //     final dataToList = CardPresentation(
+  //       url: controllerURL,
+  //       categoryContainer: controllerCatogory,
+  //     );
+  //   }
+  // }
+
+  // Criação do DropDownMenu por categoria
+  Widget _listCategoryCard() {
+    final categorys = [
+      'MOBILE_',
+      'DEVOPS_',
+      'PROGRAMAÇÃO_',
+      'DATA SCIENCE_',
+      'FRONT-END_',
+      'UX&UI DESIGN_'
+    ];
+
+    return DropdownButtonHideUnderline(
+      child: DropdownButtonFormField<String>(
+        dropdownColor: const Color.fromRGBO(5, 25, 51, 1),
+        hint: const Text('Selecionar Categoria   ',
+            style: TextStyle(color: Color.fromRGBO(254, 185, 5, 1))),
+        isExpanded: true,
+        items: categorys.map(buildMenuCategory).toList(),
+        value: widget.value,
+        onChanged: (value) => setState(() => widget.value = value),
+      ),
+    );
+  }
+
+  DropdownMenuItem<String> buildMenuCategory(String category) {
+    return DropdownMenuItem(
+      alignment: AlignmentDirectional.centerStart,
+      value: category,
+      child: Text(
+        category,
+        style: const TextStyle(color: Color.fromRGBO(254, 185, 5, 1)),
       ),
     );
   }
@@ -216,24 +273,15 @@ class TechCategoryState extends State<TechCategory> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(24.0, 8.0, 24.0, 8.0),
-      child: Column(
-        children: [
-          DropdownButtonHideUnderline(
-            child: DropdownButton<String>(
-              dropdownColor:
-                  const Color.fromRGBO(5, 25, 51, 1),
-                  // const Color(0xfff7f7f8),
-              hint: const Text('Selecionar Categoria   ',
-                  style: TextStyle(color: Color.fromRGBO(254, 185, 5, 1))),
-              isExpanded: false,
-              value: value,
-              items: categorys.map(buildMenuCategory).toList(),
-              onChanged: (value) => setState(() => this.value = value),
-            ),
-          ),
-        ],
+    return DropdownButtonHideUnderline(
+      child: DropdownButtonFormField<String>(
+        dropdownColor: const Color.fromRGBO(5, 25, 51, 1),
+        hint: const Text('Selecionar Categoria   ',
+            style: TextStyle(color: Color.fromRGBO(254, 185, 5, 1))),
+        isExpanded: false,
+        items: categorys.map(buildMenuCategory).toList(),
+        value: value,
+        onChanged: (value) => setState(() => this.value = value),
       ),
     );
   }
