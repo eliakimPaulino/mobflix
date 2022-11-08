@@ -1,12 +1,12 @@
 // ignore_for_file: depend_on_referenced_packages, prefer_const_constructors
 
-import 'package:flutter/foundation.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_link_previewer/flutter_link_previewer.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' show PreviewData;
-import 'package:mobflix/components/card_presentation.dart';
+// import 'package:mobflix/components/card_presentation.dart';
 
-import '../components/horizontal_categorys.dart';
+// import '../components/horizontal_categorys.dart';
 
 class VideoReagistration extends StatefulWidget {
   const VideoReagistration({Key? key}) : super(key: key);
@@ -100,10 +100,10 @@ class PageTitle extends StatelessWidget {
 class MyCustomTextFild extends StatefulWidget {
   MyCustomTextFild({Key? key, required this.labelText, required this.hintText})
       : super(key: key);
+
   final String labelText;
   final String hintText;
   final TextEditingController _controllerURL = TextEditingController();
-  // final DropdownMenuItem _controllerCategory;
   String? value;
 
   @override
@@ -122,9 +122,11 @@ class _MyCustomTextFildState extends State<MyCustomTextFild> {
         child: Column(
           children: [
             TextFormField(
-              onSaved: (value) => setState(() {
-                url = value!;
-              }),
+              onSaved: (value) => setState(
+                () {
+                  url = value!;
+                },
+              ),
               // validator: (value) {
               //   if (value?.length != null) {
               //     return value;
@@ -139,12 +141,12 @@ class _MyCustomTextFildState extends State<MyCustomTextFild> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                   borderSide: const BorderSide(
-                      color: Color.fromRGBO(254, 185, 5, 1), width: 2),
+                      color: Color.fromRGBO(254, 185, 5, 1), width: 1),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16),
                   borderSide: const BorderSide(
-                      color: Color.fromRGBO(254, 185, 5, 1), width: 3),
+                      color: Color.fromRGBO(254, 185, 5, 1), width: 1),
                 ),
               ),
               keyboardType: TextInputType.url,
@@ -190,7 +192,6 @@ class _MyCustomTextFildState extends State<MyCustomTextFild> {
                   VideoPreview(url: url),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pop(context);
                       // TechCategory().buildMenuCategory().value;
                     },
                     child: const Text('Cadastrar'),
@@ -198,7 +199,7 @@ class _MyCustomTextFildState extends State<MyCustomTextFild> {
                 ],
               ),
             ),
-            const SizedBox(height: 16),
+            // const SizedBox(height: 16),
           ],
         ),
       ),
@@ -207,12 +208,13 @@ class _MyCustomTextFildState extends State<MyCustomTextFild> {
 
   // void _addVideoToList(BuildContext context) {
   //   final controllerURL = widget._controllerURL.text;
-  //   final controllerCatogory = widget.value;
+  //   // final controllerCatogory = ;
   //   if (controllerURL != null && controllerCatogory != null) {
   //     final dataToList = CardPresentation(
   //       url: controllerURL,
   //       categoryContainer: controllerCatogory,
   //     );
+  //     Navigator.pop(context, dataToList);
   //   }
   // }
 
@@ -228,11 +230,11 @@ class _MyCustomTextFildState extends State<MyCustomTextFild> {
     ];
 
     return DropdownButtonHideUnderline(
-      child: DropdownButtonFormField<String>(
+      child: DropdownButton<String>(
         dropdownColor: const Color.fromRGBO(5, 25, 51, 1),
-        hint: const Text('Selecionar Categoria   ',
+        hint: const Text('Selecionar Categoria',
             style: TextStyle(color: Color.fromRGBO(254, 185, 5, 1))),
-        isExpanded: true,
+        isExpanded: false,
         items: categorys.map(buildMenuCategory).toList(),
         value: widget.value,
         onChanged: (value) => setState(() => widget.value = value),

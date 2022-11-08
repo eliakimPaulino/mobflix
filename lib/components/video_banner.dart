@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoBanner extends StatefulWidget {
-  const VideoBanner({Key? key, required this.context}) : super(key: key);
-  final BuildContext context;
+  const VideoBanner({
+    Key? key,
+    // required this.context
+  }) : super(key: key);
+  // final BuildContext context;
 
   @override
   State<VideoBanner> createState() => _VideoBannerState();
@@ -15,14 +18,12 @@ class _VideoBannerState extends State<VideoBanner> {
   @override
   void initState() {
     super.initState();
-    const url =
-        // 'https://www.youtube.com/watch?v=94yuIVdoevc&ab_channel=AluraCursosOnline';
-    // 'https://www.youtube.com/watch?v=vfR8GWj28To&ab_channel=AluraCursosOnline';
-    'https://youtu.be/2t8ycK8D4Rk';
+    const url = 'https://youtu.be/2t8ycK8D4Rk';
 
     controller = YoutubePlayerController(
       initialVideoId: YoutubePlayer.convertUrlToId(url)!,
       flags: const YoutubePlayerFlags(
+        loop: true,
         autoPlay: false,
         hideControls: true,
       ),

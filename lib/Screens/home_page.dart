@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobflix/Screens/video_registration.dart';
+import 'package:mobflix/components/videos_list.dart';
 
 import '../components/card_presentation.dart';
 import '../components/horizontal_categorys.dart';
@@ -47,6 +48,35 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: const Color.fromRGBO(5, 25, 51, 1),
+        appBar: PreferredSize(
+          preferredSize: Size(MediaQuery.of(context).size.width, 347),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Center(
+                  child: Text(
+                    'MOBFLIX',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      letterSpacing: 4,
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.amber[900],
+                    ),
+                  ),
+                ),
+              ),
+              AppBar(
+                flexibleSpace: const VideoBanner(),
+                backgroundColor: const Color.fromRGBO(5, 25, 51, 1),
+                elevation: 0,
+              ),
+              const CategoryRow(),
+            ],
+          ),
+        ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.push(
@@ -60,7 +90,9 @@ class _HomePageState extends State<HomePage> {
           },
           child: const Icon(Icons.add),
         ),
-        body: Container(
+        
+        body: 
+        Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           // constraints: const BoxConstraints(maxWidth: 515),
@@ -78,35 +110,38 @@ class _HomePageState extends State<HomePage> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    'MOBFLIX',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      letterSpacing: 4,
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.amber[900],
-                    ),
-                  ),
-                ),
-                VideoBanner(context: context),
-                const CategoryRow(),
+                // Padding(
+                //   padding: const EdgeInsets.all(16.0),
+                //   child: Text(
+                //     'MOBFLIX',
+                //     textAlign: TextAlign.center,
+                //     style: TextStyle(
+                //       letterSpacing: 4,
+                //       fontSize: 32,
+                //       fontWeight: FontWeight.bold,
+                //       color: Colors.amber[900],
+                //     ),
+                //   ),
+                // ),
+                // const VideoBanner(
+                //     // context: context
+                //     ),
+                // const CategoryRow(),
                 Column(
                   children: [
                     cardsList[0],
                     cardsList[1],
-                    cardsList[2],
-                    cardsList[3],
-                    cardsList[4],
-                    cardsList[5],
+                    // cardsList[2],
+                    // cardsList[3],
+                    // cardsList[4],
+                    // cardsList[5],
                   ],
                 ),
               ],
             ),
           ),
         ),
+        // VideosList(),
       ),
     );
   }
