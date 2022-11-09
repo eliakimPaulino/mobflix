@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobflix/Screens/video_registration.dart';
-import 'package:mobflix/components/videos_list.dart';
+// import 'package:mobflix/components/videos_list.dart';
 
 import '../components/card_presentation.dart';
 import '../components/horizontal_categorys.dart';
@@ -47,101 +47,109 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        backgroundColor: const Color.fromRGBO(5, 25, 51, 1),
-        appBar: PreferredSize(
-          preferredSize: Size(MediaQuery.of(context).size.width, 347),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Center(
-                  child: Text(
-                    'MOBFLIX',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      letterSpacing: 4,
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.amber[900],
-                    ),
-                  ),
+      child: DefaultTabController(
+        length: 6,
+        child: Scaffold(
+          backgroundColor: const Color.fromRGBO(5, 25, 51, 1),
+          appBar: AppBar(
+            // flexibleSpace: const VideoBanner(),
+            backgroundColor: const Color.fromRGBO(12, 67, 136, 1),
+            elevation: 0,
+            bottom: const TabBar(tabs: [
+              Tab(text: 'MOBILE_'),
+              Tab(text: 'DEVOPS_'),
+              Tab(text: 'PROGRAMAÇÃO_'),
+              Tab(text: 'DATA SCIENCE_'),
+              Tab(text: 'FRONT-END_'),
+              Tab(text: 'UX&UI DESIGN_'),
+            ]),
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const VideoReagistration();
+                  },
                 ),
+              );
+            },
+            child: const Icon(Icons.add),
+          ),
+
+          body: const TabBarView(
+            children: [
+              Center(
+                child: Text('Page 1'),
               ),
-              AppBar(
-                flexibleSpace: const VideoBanner(),
-                backgroundColor: const Color.fromRGBO(5, 25, 51, 1),
-                elevation: 0,
+              Center(
+                child: Text('Page 2'),
               ),
-              const CategoryRow(),
+              Center(
+                child: Text('Page 3'),
+              ),
+              Center(
+                child: Text('Page 4'),
+              ),
+              Center(
+                child: Text('Page 5'),
+              ),
+              Center(
+                child: Text('Page 6'),
+              ),
             ],
           ),
+          // Container(
+          //   height: MediaQuery.of(context).size.height,
+          //   width: MediaQuery.of(context).size.width,
+          //   decoration: const BoxDecoration(
+          //     gradient: LinearGradient(
+          //       begin: Alignment.topCenter,
+          //       end: Alignment.bottomCenter,
+          //       colors: [
+          //         Color.fromRGBO(5, 25, 51, 1),
+          //         Color.fromRGBO(12, 67, 136, 1),
+          //         Color.fromRGBO(12, 67, 136, 1),
+          //       ],
+          //     ),
+          //   ),
+          //   child: SingleChildScrollView(
+          //     child: Column(
+          //       children: [
+          //         // Padding(
+          //         //   padding: const EdgeInsets.all(16.0),
+          //         //   child: Text(
+          //         //     'MOBFLIX',
+          //         //     textAlign: TextAlign.center,
+          //         //     style: TextStyle(
+          //         //       letterSpacing: 4,
+          //         //       fontSize: 32,
+          //         //       fontWeight: FontWeight.bold,
+          //         //       color: Colors.amber[900],
+          //         //     ),
+          //         //   ),
+          //         // ),
+          //         // const VideoBanner(
+          //         //     // context: context
+          //         //     ),
+          //         // const CategoryRow(),
+          //         Column(
+          //           children: [
+          //             cardsList[0],
+          //             cardsList[1],
+          //             // cardsList[2],
+          //             // cardsList[3],
+          //             // cardsList[4],
+          //             // cardsList[5],
+          //           ],
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
+          // VideosList(),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return const VideoReagistration();
-                },
-              ),
-            );
-          },
-          child: const Icon(Icons.add),
-        ),
-        
-        body: 
-        Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          // constraints: const BoxConstraints(maxWidth: 515),
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color.fromRGBO(5, 25, 51, 1),
-                Color.fromRGBO(12, 67, 136, 1),
-                Color.fromRGBO(12, 67, 136, 1),
-              ],
-            ),
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                // Padding(
-                //   padding: const EdgeInsets.all(16.0),
-                //   child: Text(
-                //     'MOBFLIX',
-                //     textAlign: TextAlign.center,
-                //     style: TextStyle(
-                //       letterSpacing: 4,
-                //       fontSize: 32,
-                //       fontWeight: FontWeight.bold,
-                //       color: Colors.amber[900],
-                //     ),
-                //   ),
-                // ),
-                // const VideoBanner(
-                //     // context: context
-                //     ),
-                // const CategoryRow(),
-                Column(
-                  children: [
-                    cardsList[0],
-                    cardsList[1],
-                    // cardsList[2],
-                    // cardsList[3],
-                    // cardsList[4],
-                    // cardsList[5],
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-        // VideosList(),
       ),
     );
   }
@@ -155,7 +163,7 @@ class CategoryRow extends StatelessWidget {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(1.0),
         child: Row(
           children: [
             categorys[0],

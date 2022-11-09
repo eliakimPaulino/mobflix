@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mobflix/Screens/home_page.dart';
+// import 'package:mobflix/Screens/home_page.dart';
+
+import 'Screens/test_sliver_appbar.dart';
 
 // import 'Screens/home_page.dart';
 // import 'Screens/video_registration.dart';
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
         ),
         primarySwatch: Colors.orange,
       ),
-      home: const HomePage(),
+      home: TestClass(),
     );
   }
 }

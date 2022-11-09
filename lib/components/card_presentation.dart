@@ -85,31 +85,28 @@ class _CardPresentationState extends State<CardPresentation> {
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Column(
-                      children: [
-                        LinkPreview(
-                          hideImage: true,
-                          onPreviewDataFetched: (data) {
-                            setState(() {
-                              datas = {
-                                ...datas,
-                                widget.url: data,
-                              };
-                            });
-                          },
-                          text: widget.url,
-                          previewData: datas[widget.url],
-                          width: MediaQuery.of(context).size.width,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    children: [
+                      LinkPreview(
+                        hideImage: true,
+                        onPreviewDataFetched: (data) {
+                          setState(() {
+                            datas = {
+                              ...datas,
+                              widget.url: data,
+                            };
+                          });
+                        },
+                        text: widget.url,
+                        previewData: datas[widget.url],
+                        width: MediaQuery.of(context).size.width,
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ],
           ),

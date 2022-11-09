@@ -104,6 +104,7 @@ class MyCustomTextFild extends StatefulWidget {
   final String labelText;
   final String hintText;
   final TextEditingController _controllerURL = TextEditingController();
+  final TextEditingController _controllerCategory = TextEditingController();
   String? value;
 
   @override
@@ -121,43 +122,9 @@ class _MyCustomTextFildState extends State<MyCustomTextFild> {
         key: formKey,
         child: Column(
           children: [
-            TextFormField(
-              onSaved: (value) => setState(
-                () {
-                  url = value!;
-                },
-              ),
-              // validator: (value) {
-              //   if (value?.length != null) {
-              //     return value;
-              //   } else {
-              //     return 'Digite um URL';
-              //   }
-              // },
-              cursorColor: const Color.fromRGBO(254, 185, 5, 1),
-              decoration: InputDecoration(
-                hintText: widget.hintText,
-                labelText: widget.labelText,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(
-                      color: Color.fromRGBO(254, 185, 5, 1), width: 1),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: const BorderSide(
-                      color: Color.fromRGBO(254, 185, 5, 1), width: 1),
-                ),
-              ),
-              keyboardType: TextInputType.url,
-              textInputAction: TextInputAction.go,
-            ),
+            textFormField(),
             const SizedBox(height: 16),
-            // const TechCategory(),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 8, 16, 8),
-              child: _listCategoryCard(),
-            ),
+            textFormField(),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
@@ -206,52 +173,76 @@ class _MyCustomTextFildState extends State<MyCustomTextFild> {
     );
   }
 
+  Widget textFormField() {
+    return TextFormField(
+      onSaved: (value) => setState(
+        () {
+          url = value!;
+        },
+      ),
+      cursorColor: const Color.fromRGBO(254, 185, 5, 1),
+      decoration: InputDecoration(
+        hintText: widget.hintText,
+        labelText: widget.labelText,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide:
+              const BorderSide(color: Color.fromRGBO(254, 185, 5, 1), width: 1),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide:
+              const BorderSide(color: Color.fromRGBO(254, 185, 5, 1), width: 1),
+        ),
+      ),
+      keyboardType: TextInputType.url,
+      textInputAction: TextInputAction.go,
+    );
+  }
+
   // void _addVideoToList(BuildContext context) {
   //   final controllerURL = widget._controllerURL.text;
-  //   // final controllerCatogory = ;
-  //   if (controllerURL != null && controllerCatogory != null) {
-  //     final dataToList = CardPresentation(
-  //       url: controllerURL,
-  //       categoryContainer: controllerCatogory,
-  //     );
+  //   final controllerCategory = widget._controllerCategory.text;    
+  //   if (controllerURL != null && controllerCategory != null) {
+  //     final dataToList = 
   //     Navigator.pop(context, dataToList);
   //   }
   // }
 
   // Criação do DropDownMenu por categoria
-  Widget _listCategoryCard() {
-    final categorys = [
-      'MOBILE_',
-      'DEVOPS_',
-      'PROGRAMAÇÃO_',
-      'DATA SCIENCE_',
-      'FRONT-END_',
-      'UX&UI DESIGN_'
-    ];
+  // Widget _listCategoryCard() {
+  //   final categorys = [
+  //     'MOBILE_',
+  //     'DEVOPS_',
+  //     'PROGRAMAÇÃO_',
+  //     'DATA SCIENCE_',
+  //     'FRONT-END_',
+  //     'UX&UI DESIGN_'
+  //   ];
 
-    return DropdownButtonHideUnderline(
-      child: DropdownButton<String>(
-        dropdownColor: const Color.fromRGBO(5, 25, 51, 1),
-        hint: const Text('Selecionar Categoria',
-            style: TextStyle(color: Color.fromRGBO(254, 185, 5, 1))),
-        isExpanded: false,
-        items: categorys.map(buildMenuCategory).toList(),
-        value: widget.value,
-        onChanged: (value) => setState(() => widget.value = value),
-      ),
-    );
-  }
+  //   return DropdownButtonHideUnderline(
+  //     child: DropdownButton<String>(
+  //       dropdownColor: const Color.fromRGBO(5, 25, 51, 1),
+  //       hint: const Text('Selecionar Categoria',
+  //           style: TextStyle(color: Color.fromRGBO(254, 185, 5, 1))),
+  //       isExpanded: false,
+  //       items: categorys.map(buildMenuCategory).toList(),
+  //       value: widget.value,
+  //       onChanged: (value) => setState(() => widget.value = value),
+  //     ),
+  //   );
+  // }
 
-  DropdownMenuItem<String> buildMenuCategory(String category) {
-    return DropdownMenuItem(
-      alignment: AlignmentDirectional.centerStart,
-      value: category,
-      child: Text(
-        category,
-        style: const TextStyle(color: Color.fromRGBO(254, 185, 5, 1)),
-      ),
-    );
-  }
+  // DropdownMenuItem<String> buildMenuCategory(String category) {
+  //   return DropdownMenuItem(
+  //     alignment: AlignmentDirectional.centerStart,
+  //     value: category,
+  //     child: Text(
+  //       category,
+  //       style: const TextStyle(color: Color.fromRGBO(254, 185, 5, 1)),
+  //     ),
+  //   );
+  // }
 }
 
 class TechCategory extends StatefulWidget {
