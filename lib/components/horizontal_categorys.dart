@@ -15,18 +15,15 @@ class CategoryCard extends StatelessWidget {
           height: 32,
           width: 130,
           decoration: BoxDecoration(
-            // border: Border.all(color: Colors.white),
             color: color,
             borderRadius: BorderRadius.circular(8),
             boxShadow: const [
               BoxShadow(
-                color: 
-                // color,
-                Color(0xff000000),
+                color:
+                    // color,
+                    Color(0xff000000),
                 offset: Offset(0, 4),
                 blurRadius: 3.0,
-                // spreadRadius: 3.0,
-                // blurStyle: BlurStyle.outer,
               )
             ],
           ),

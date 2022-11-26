@@ -1,6 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
+import 'package:mobflix/components/horizontal_categorys.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import 'package:flutter_link_previewer/flutter_link_previewer.dart';
@@ -9,13 +10,12 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' show PreviewData;
 class CardPresentation extends StatefulWidget {
   const CardPresentation({
     Key? key,
-    // required this.context,
     required this.url,
-    required this.categoryContainer,
+    required this.index,
   }) : super(key: key);
-  
+
   final String url;
-  final Widget categoryContainer;
+  final int index;
 
   @override
   State<CardPresentation> createState() => _CardPresentationState();
@@ -71,42 +71,30 @@ class _CardPresentationState extends State<CardPresentation> {
             children: [
               Stack(
                 children: [
-                  Visibility(
-                    visible: true,
-                    child: AspectRatio(
-                      aspectRatio: 16.0 / 9.0,
-                      child: player,
-                    ),
+                  AspectRatio(
+                    aspectRatio: 16.0 / 9.0,
+                    child: player,
                   ),
                   Positioned(
-                    top: 6,
-                    left: 0,
-                    child: widget.categoryContainer,
+                    top: 1,
+                    left: 1,
+                    child: categorys[widget.index],
                   ),
                 ],
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    children: [
-                      LinkPreview(
-                        hideImage: true,
-                        onPreviewDataFetched: (data) {
-                          setState(() {
-                            datas = {
-                              ...datas,
-                              widget.url: data,
-                            };
-                          });
-                        },
-                        text: widget.url,
-                        previewData: datas[widget.url],
-                        width: MediaQuery.of(context).size.width,
-                      ),
-                    ],
-                  ),
-                ],
+              LinkPreview(
+                hideImage: true,
+                onPreviewDataFetched: (data) {
+                  setState(() {
+                    datas = {
+                      ...datas,
+                      widget.url: data,
+                    };
+                  });
+                },
+                text: widget.url,
+                previewData: datas[widget.url],
+                width: MediaQuery.of(context).size.width,
               ),
             ],
           ),

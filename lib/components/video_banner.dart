@@ -4,9 +4,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 class VideoBanner extends StatefulWidget {
   const VideoBanner({
     Key? key,
-    // required this.context
   }) : super(key: key);
-  // final BuildContext context;
 
   @override
   State<VideoBanner> createState() => _VideoBannerState();
