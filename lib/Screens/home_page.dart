@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mobflix/Screens/video_registration.dart';
+import 'package:mobflix/components/card_presentation.dart';
 import 'package:mobflix/data/card_data.dart';
 
 import '../components/horizontal_categorys.dart';
 import '../components/video_banner.dart';
+import '../data/video_dao.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,8 +15,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool recharge = false;
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -25,7 +29,9 @@ class _HomePageState extends State<HomePage> {
                 registrationContext: context,
               ),
             ),
-          );
+          ).then((value) => setState(() {
+                debugPrint('Recarregando tela inicial...');
+              }));
         },
         child: const Icon(Icons.add),
       ),
@@ -34,9 +40,19 @@ class _HomePageState extends State<HomePage> {
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
             SliverAppBar(
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.replay_outlined, color: Colors.white),
+                  onPressed: () {
+                    setState(() {});
+                  },
+                  tooltip: 'Lista Favoritos',
+                ),
+              ],
+              pinned: true,
               elevation: 0,
               backgroundColor: const Color.fromRGBO(5, 25, 51, 1),
-              expandedHeight: 234,
+              expandedHeight: screenSize.height * .22,
               flexibleSpace: FlexibleSpaceBar(
                 title: Text(
                   'MOBFLIX',
@@ -69,11 +85,72 @@ class _HomePageState extends State<HomePage> {
           ),
           child: Column(
             children: [
-              const CategoryRow(),
+              categoryRow(),
               Expanded(
-                child: ListView(
-                  // shrinkWrap: true,
-                  children: CardInheritedData.of(context)!.cardsList,
+                child: FutureBuilder<List<CardPresentation>>(
+                  future: VideoDao().findAll(),
+                  builder: (context, snapshot) {
+                    List<CardPresentation>? videos = snapshot.data;
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.none:
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            CircularProgressIndicator(),
+                            Text(
+                              'Carregando...',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ],
+                        );
+                      case ConnectionState.waiting:
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            CircularProgressIndicator(),
+                            Text(
+                              'Carregando...',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ],
+                        );
+                      case ConnectionState.active:
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            CircularProgressIndicator(),
+                            Text(
+                              'Carregando...',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ],
+                        );
+                      case ConnectionState.done:
+                        if (snapshot.hasData && videos != null) {
+                          if (videos.isNotEmpty) {
+                            return ListView.builder(
+                              itemCount: videos.length,
+                              itemBuilder: (context, index) {
+                                final CardPresentation video = videos[index];
+                                return video;
+                              },
+                            );
+                          }
+                          return const Center(
+                            child: Text(
+                              'Lista de Vídeos está vazia',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          );
+                        }
+                        return const Center(
+                          child: Text(
+                            'Lista de Vídeos está vazia',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        );
+                    }
+                  },
                 ),
               ),
             ],
@@ -82,13 +159,8 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-}
 
-class CategoryRow extends StatelessWidget {
-  const CategoryRow({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
+  Widget categoryRow() {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
@@ -99,6 +171,7 @@ class CategoryRow extends StatelessWidget {
           categorys[3],
           categorys[4],
           categorys[5],
+          categorys[6],
         ],
       ),
     );

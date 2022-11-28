@@ -11,7 +11,12 @@ class CardInheritedData extends InheritedWidget {
 
   final Widget child;
 
-  final List<CardPresentation> cardsList = [];
+  final List<CardPresentation> cardsList = [
+    CardPresentation(
+      url: 'https://www.youtube.com/watch?v=BO9TAXATAqk',
+      index: 0,
+    ),
+  ];
 
   void newCard(String url, int index) {
     cardsList.add(CardPresentation(

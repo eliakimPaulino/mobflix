@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:mobflix/components/horizontal_categorys.dart';
+import 'package:mobflix/data/video_dao.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import 'package:flutter_link_previewer/flutter_link_previewer.dart';
@@ -24,6 +25,8 @@ class CardPresentation extends StatefulWidget {
 class _CardPresentationState extends State<CardPresentation> {
   late YoutubePlayerController controller;
 
+  bool alreadySaved = false;
+
   @override
   void initState() {
     super.initState();
@@ -32,6 +35,7 @@ class _CardPresentationState extends State<CardPresentation> {
     controller = YoutubePlayerController(
       initialVideoId: YoutubePlayer.convertUrlToId(url)!,
       flags: const YoutubePlayerFlags(
+        forceHD: true,
         autoPlay: false,
         hideControls: false,
         enableCaption: false,
@@ -67,7 +71,7 @@ class _CardPresentationState extends State<CardPresentation> {
           surfaceTintColor: Colors.blue,
           clipBehavior: Clip.antiAlias,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Stack(
                 children: [
@@ -76,8 +80,8 @@ class _CardPresentationState extends State<CardPresentation> {
                     child: player,
                   ),
                   Positioned(
-                    top: 1,
-                    left: 1,
+                    top: 0,
+                    left: 0,
                     child: categorys[widget.index],
                   ),
                 ],
@@ -96,6 +100,34 @@ class _CardPresentationState extends State<CardPresentation> {
                 previewData: datas[widget.url],
                 width: MediaQuery.of(context).size.width,
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    tooltip: 'Add a Lista',
+                    onPressed: () {
+                      setState(() {
+                        alreadySaved = !alreadySaved;
+                      });
+                    },
+                    icon: Icon(Icons.thumb_up_sharp,
+                        color: alreadySaved
+                            ? const Color.fromRGBO(12, 67, 136, 1)
+                            : Colors.grey),
+                  ),
+                  IconButton(
+                    tooltip: 'Deletar',
+                    onPressed: () {
+                      VideoDao().delete(widget.url);
+                      Future.delayed(const Duration(milliseconds: 500), () {
+                        setState(() {});
+                      });
+                    },
+                    icon: const Icon(Icons.delete_forever_rounded,
+                        color: Colors.grey),
+                  ),
+                ],
+              )
             ],
           ),
         ),

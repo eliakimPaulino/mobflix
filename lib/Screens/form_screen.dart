@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mobflix/components/card_presentation.dart';
 import 'package:mobflix/components/video_preview.dart';
+import 'package:mobflix/data/video_dao.dart';
 
-import '../data/card_data.dart';
-
-class MyCustomTextFild extends StatefulWidget {
-  const MyCustomTextFild({
+class FormScreen extends StatefulWidget {
+  const FormScreen({
     Key? key,
     required this.customTextFildContext,
   }) : super(key: key);
@@ -12,12 +12,13 @@ class MyCustomTextFild extends StatefulWidget {
   final BuildContext customTextFildContext;
 
   @override
-  State<MyCustomTextFild> createState() => _MyCustomTextFildState();
+  State<FormScreen> createState() => _FormScreenState();
 }
 
-class _MyCustomTextFildState extends State<MyCustomTextFild> {
+class _FormScreenState extends State<FormScreen> {
   final TextEditingController _myController = TextEditingController();
   final TextEditingController _dropMenuController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -27,7 +28,6 @@ class _MyCustomTextFildState extends State<MyCustomTextFild> {
   }
 
   String? value;
-  final _formKey = GlobalKey<FormState>();
   String url = '';
   bool visible = false;
 
@@ -77,7 +77,6 @@ class _MyCustomTextFildState extends State<MyCustomTextFild> {
             ),
             Visibility(
               visible: visible,
-              // visible: _formKey.currentState?.validate() != null,
               child: Column(
                 children: [
                   VideoPreview(url: url),
@@ -94,12 +93,16 @@ class _MyCustomTextFildState extends State<MyCustomTextFild> {
                         },
                       );
                       if (_formKey.currentState!.validate()) {
-                        CardInheritedData.of(widget.customTextFildContext)!
-                            .newCard(_myController.text, indexToPass);
+                        VideoDao().save(
+                          CardPresentation(
+                            url: _myController.text,
+                            index: indexToPass,
+                          ),
+                        );
                       }
                       Navigator.pop(context);
                     },
-                    child: const Text('Cadastrar'),
+                    child: const Text('Adicionar'),
                   ),
                 ],
               ),
@@ -120,7 +123,7 @@ class _MyCustomTextFildState extends State<MyCustomTextFild> {
         return null;
       },
       cursorColor: const Color.fromRGBO(254, 185, 5, 1),
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         hintText: 'URL',
         labelText: 'Digite uma URL do Youtube',
       ),
@@ -133,21 +136,25 @@ class _MyCustomTextFildState extends State<MyCustomTextFild> {
     'PROGRAMAÇÃO_',
     'DATA SCIENCE_',
     'FRONT-END_',
-    'UX&UI DESIGN_'
+    'UX&UI DESIGN_',
+    'OUTROS_',
   ];
 
   Widget dropMenu() {
     return DropdownButtonHideUnderline(
       child: DropdownButton<String>(
         dropdownColor: const Color.fromRGBO(5, 25, 51, 1),
-        hint: const Text('Selecionar Categoria   ',
-            style: TextStyle(color: Color.fromRGBO(254, 185, 5, 1))),
+        hint: const Text(
+          'Selecionar Categoria   ',
+          style: TextStyle(
+            color: Color.fromRGBO(254, 185, 5, 1),
+          ),
+        ),
         isExpanded: false,
         items: categorys.map(buildMenuCategory).toList(),
         value: value,
         onChanged: (value) {
           _dropMenuController.text = value.toString();
-          // _dropMenuController.text = value.toString();
           setState(() => this.value = value);
         },
       ),

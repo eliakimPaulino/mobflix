@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../components/text_form_component.dart';
+import 'package:mobflix/Screens/form_screen.dart';
 
 class VideoReagistration extends StatelessWidget {
   const VideoReagistration({Key? key, required this.registrationContext})
@@ -29,7 +29,7 @@ class VideoReagistration extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               pageTitle(context),
-              MyCustomTextFild(customTextFildContext: registrationContext),
+              FormScreen(customTextFildContext: registrationContext),
             ],
           ),
         ),
@@ -53,7 +53,7 @@ class VideoReagistration extends StatelessWidget {
                 color: Color.fromRGBO(254, 185, 5, 1),
               ),
             ),
-            SizedBox(width: screenSize.width * .11),
+            SizedBox(width: screenSize.width * .06),
             const Text(
               'Cadastre um vídeo',
               style: TextStyle(

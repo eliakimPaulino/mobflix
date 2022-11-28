@@ -65,4 +65,8 @@ List<CategoryCard> categorys = const [
     name: 'UX&UI DESIGN_',
     color: Color.fromRGBO(214, 107, 185, 1),
   ),
+  CategoryCard(
+    name: 'OUTROS_',
+    color: Color.fromRGBO(134, 133, 82, 1),
+  ),
 ];

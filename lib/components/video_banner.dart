@@ -24,6 +24,7 @@ class _VideoBannerState extends State<VideoBanner> {
         loop: true,
         autoPlay: false,
         hideControls: true,
+        showLiveFullscreenButton: false,
       ),
     )..addListener(() {
         if (mounted) {
@@ -46,41 +47,16 @@ class _VideoBannerState extends State<VideoBanner> {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return YoutubePlayerBuilder(
       player: YoutubePlayer(controller: controller),
       builder: (context, player) => SizedBox(
         height: 238,
         width: MediaQuery.of(context).size.width,
-        child: Stack(
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              child: player,
-            ),
-            Positioned(
-              left: MediaQuery.of(context).size.width / 2.5,
-              bottom: 5,
-              child: SizedBox(
-                height: 30,
-                width: 120,
-                child: Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (controller.value.isPlaying) {
-                        controller.pause();
-                      } else {
-                        controller.play();
-                      }
-                    },
-                    child: controller.value.isPlaying
-                        ? const Icon(Icons.pause)
-                        : const Text('Assista agora'),
-                  ),
-                ),
-              ),
-            ),
-          ],
+        child: SizedBox(
+          height: screenSize.height,
+          width: screenSize.width,
+          child: player,
         ),
       ),
     );
